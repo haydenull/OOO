@@ -4,7 +4,8 @@
   "description": "聊天室后端项目",
   "private": true,
   "dependencies": {
-    "egg": "^1.4.0"
+    "egg": "^1.4.0",
+    "egg-mysql": "^3.0.0"
   },
   "devDependencies": {
     "autod": "^2.8.0",

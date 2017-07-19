@@ -1,3 +1,8 @@
 {
-  "extends": "eslint-config-egg"
+  "extends": "eslint-config-egg",
+  "rules": {
+    "indent": "off",
+    "comma-dangle": "error",
+    "no-unused-vars": "warn"
+  }
 }
