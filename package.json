@@ -6,7 +6,8 @@
   "dependencies": {
     "egg": "^1.4.0",
     "egg-cors": "^1.1.0",
-    "egg-mysql": "^3.0.0"
+    "egg-mysql": "^3.0.0",
+    "egg-socket.io": "^2.0.2"
   },
   "devDependencies": {
     "autod": "^2.8.0",

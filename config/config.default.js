@@ -21,6 +21,15 @@ module.exports = appInfo => {
     config.security = {
         domainWhiteList: [ 'http://localhost:8080' ],
     };
+    config.io = {
+        init: { },
+        match: '/chat',
+        namespace: {
+            '/chat': {
+                connectionMiddleware: [ 'chat' ],
+            },
+        },
+    };
 
     return config;
 };
