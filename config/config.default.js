@@ -18,6 +18,9 @@ module.exports = appInfo => {
         app: true,
         agent: false,
     };
+    config.security = {
+        domainWhiteList: [ 'http://localhost:8080' ],
+    };
 
     return config;
 };
