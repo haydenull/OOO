@@ -15,10 +15,11 @@ module.exports = app => {
         // 登录
         * login(ctx) {
             let result = {};
-            const email = ctx.params.email;
-            const password = yield ctx.service.user.find(email);
-            // TODO: 用户不存在的情况
-            if (ctx.params.password === password) {
+            const email = ctx.query.email;
+            const dbResult = yield ctx.service.user.find(email);
+            if (dbResult.length === 0) {
+                result = { success: false, message: '用户不存在' };
+            } else if (dbResult[0].password === ctx.query.password) {
                 result = { success: true, message: '登录成功' };
             } else {
                 result = { success: false, message: '密码错误' };
