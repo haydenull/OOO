@@ -22,11 +22,10 @@ module.exports = appInfo => {
         domainWhiteList: [ 'http://localhost:8080' ],
     };
     config.io = {
-        init: { },
-        match: '/chat',
         namespace: {
-            '/chat': {
-                connectionMiddleware: [ 'chat' ],
+            '/': {
+                connectionMiddleware: [ 'auth' ],
+                packetMiddleware: [ 'filter' ],
             },
         },
     };
