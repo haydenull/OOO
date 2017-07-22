@@ -7,5 +7,5 @@ module.exports = app => {
     // 登录
     app.get('/login', app.controller.user.login);
     app.get('/cors', app.controller.user.cors);
-    app.io.of('/chat').route('chat', app.io.controllers.chat);
+    app.io.of('/').route('chat', app.io.controllers.chat);
 };
