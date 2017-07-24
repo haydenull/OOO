@@ -20,7 +20,7 @@ module.exports = app => {
             if (dbResult.length === 0) {
                 result = { success: false, message: '用户不存在' };
             } else if (dbResult[0].password === ctx.query.password) {
-                result = { success: true, message: '登录成功' };
+                result = { success: true, message: '登录成功', id: dbResult[0].id };
             } else {
                 result = { success: false, message: '密码错误' };
             }
