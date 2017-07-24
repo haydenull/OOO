@@ -5,7 +5,7 @@ module.exports = app => {
         * find(email) {
             const password = yield app.mysql.select('user', {
                 where: { email },
-                columns: [ 'password', 'id' ],
+                columns: [ 'password', 'id', 'name' ],
             });
             return password;
         }
