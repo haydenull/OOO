@@ -20,6 +20,9 @@ module.exports = appInfo => {
     };
     config.security = {
         domainWhiteList: [ 'http://localhost:8080' ],
+        csrf: {
+            enable: false,
+        },
     };
     config.io = {
         namespace: {
@@ -28,6 +31,9 @@ module.exports = appInfo => {
                 packetMiddleware: [ 'filter' ],
             },
         },
+    };
+    config.bodyParser = {
+        enable: true,
     };
 
     return config;
