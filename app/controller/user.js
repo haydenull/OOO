@@ -3,7 +3,7 @@
 module.exports = app => {
     class UserController extends app.Controller {
         // 注册
-        * signin(ctx) {
+        * signup(ctx) {
             // TODO: 查询是否有重复邮箱 数据库存储邮箱密码
             let result = {};
             const name = ctx.request.body.name;
@@ -20,7 +20,8 @@ module.exports = app => {
                 result = { success: false, message: '邮箱已存在' };
             } else {
                 yield this.app.mysql.insert('user', { name, password, email });
-                result = { success: true, message: '注册新用户成功' };
+                const insertRes = yield ctx.service.user.find(email);
+                result = { success: true, message: '注册新用户成功', id: insertRes[0].id };
             }
             ctx.body = result;
             ctx.status = 200;
@@ -35,7 +36,6 @@ module.exports = app => {
             let result = {};
             const email = ctx.request.body.email;
             const dbResult = yield ctx.service.user.find(email);
-            console.log(ctx.request.body);
             if (dbResult.length === 0) {
                 result = { success: false, message: '用户不存在' };
             } else if (dbResult[0].password === ctx.request.body.password) {
