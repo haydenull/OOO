@@ -1,12 +1,40 @@
 'use strict';
 
 module.exports = appInfo => {
-  const config = {};
+    const config = {};
 
-  // should change to your own
-  config.keys = appInfo.name + '_1499962730630_3731';
+    // should change to your own
+    config.keys = appInfo.name + '_1499962730630_3731';
 
-  // add your config here
+    // add your config here
+    config.mysql = {
+        client: {
+            host: '127.0.0.1',
+            port: '3306',
+            user: 'root',
+            password: 'XINLUOGAO',
+            database: 'faiz',
+        },
+        app: true,
+        agent: false,
+    };
+    config.security = {
+        domainWhiteList: [ 'http://localhost:8080' ],
+        csrf: {
+            enable: false,
+        },
+    };
+    config.io = {
+        namespace: {
+            '/': {
+                connectionMiddleware: [ 'auth' ],
+                packetMiddleware: [ 'filter' ],
+            },
+        },
+    };
+    config.bodyParser = {
+        enable: true,
+    };
 
-  return config;
+    return config;
 };
