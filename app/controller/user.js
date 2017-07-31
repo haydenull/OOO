@@ -9,7 +9,7 @@ module.exports = app => {
             const name = ctx.request.body.name;
             const email = ctx.request.body.email;
             const password = ctx.request.body.password;
-            if (!name || !email || !password || name.length === 0 || email.length === 0 || password.length < 6) {
+            if (!ctx.service.user.verifyEmail(email) || !ctx.service.user.verifyPassword(password) || !ctx.service.user.verifyName(name)) {
                 result = { success: false, message: '信息格式有误' };
                 ctx.body = result;
                 ctx.status = 200;
@@ -35,10 +35,17 @@ module.exports = app => {
         * login(ctx) {
             let result = {};
             const email = ctx.request.body.email;
+            const password = ctx.request.body.password;
+            if (!ctx.service.user.verifyEmail(email) || !ctx.service.user.verifyPassword(password)) {
+                result = { success: false, message: '输入信息格式有误' };
+                ctx.body = result;
+                ctx.status = 200;
+                return;
+            }
             const dbResult = yield ctx.service.user.find(email);
             if (dbResult.length === 0) {
                 result = { success: false, message: '用户不存在' };
-            } else if (dbResult[0].password === ctx.request.body.password) {
+            } else if (dbResult[0].password === password) {
                 result = { success: true, message: '登录成功', id: dbResult[0].id, name: dbResult[0].name };
             } else {
                 result = { success: false, message: '密码错误' };
